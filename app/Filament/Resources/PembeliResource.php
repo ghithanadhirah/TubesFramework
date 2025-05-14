@@ -17,17 +17,13 @@ class PembeliResource extends Resource
 {
     protected static ?string $model = Pembeli::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static ?string $navigationIcon = 'heroicon-o-identification';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('kode_pembeli')
-                    ->label('Kode Pembeli')
-                    ->default(fn () => Pembeli::getKdPembeli())
-                    ->required()
-                    ->readonly(),
+
                 
                 TextInput::make('nama')
                     ->label('Nama Pembeli')
@@ -45,6 +41,7 @@ class PembeliResource extends Resource
                     ->required()
                     ->placeholder('Masukkan email pembeli'),
                 
+                    
                 TextInput::make('nomor_telepon')
                     ->label('No. Telepon')
                     ->tel()
@@ -61,9 +58,6 @@ class PembeliResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('kode_pembeli')
-                    ->label('Kode Pembeli')
-                    ->sortable(),
                 
                 TextColumn::make('nama')
                     ->label('Nama Pembeli')

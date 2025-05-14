@@ -33,12 +33,18 @@ class KaryawanResource extends Resource
 {
     protected static ?string $model = Karyawan::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                TextInput::make('id_karyawan')
+                    ->label('ID Karyawan')
+                    ->readOnly()
+                    ->default(fn () => \App\Models\Karyawan::generateID())
+                    ->required(),
+
                 TextInput::make('nama')
                     ->label('Nama')
                     ->required(),
@@ -76,6 +82,11 @@ class KaryawanResource extends Resource
     {
         return $table
         ->columns([
+            TextColumn::make('id_karyawan')
+                ->label('ID Karyawan')
+                ->sortable()
+                ->searchable(),
+
             TextColumn::make('nama')
                 ->label('Nama')
                 ->searchable()

@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pembelis', function (Blueprint $table) {
+        Schema::create('pembeli', function (Blueprint $table) {
             $table->id();  // Kolom ID Pembeli
-            $table->string('kode_pembeli'); 
             $table->string('nama');  // Nama Pembeli
             $table->string('alamat');  // Alamat Pembeli
             $table->string('nomor_telepon');  // Nomor Telepon Pembeli
             $table->string('email')->unique();  // Email Pembeli (unik)
-            $table->date('tanggal_daftar');  // Tanggal Pembeli Terdaftar
             $table->enum('status', ['aktif', 'tidak aktif']);  // Status Pembeli
             $table->timestamps();  // Kolom created_at dan updated_at
         });
@@ -29,7 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pembelis');
+        Schema::dropIfExists('pembeli');
     }
 };
 
