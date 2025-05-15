@@ -31,4 +31,9 @@ class Pembeli extends Model
         $nomakhir = 'PB' . str_pad($nomor2, 3, "0", STR_PAD_LEFT); // Format kembali dengan string PB001
         return $nomakhir;
     }
+
+    public function penjualan()
+    {
+        return $this->hasMany(Penjualan::class, 'pembeli_id');
+    }
 }
