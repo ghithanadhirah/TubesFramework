@@ -40,4 +40,10 @@ class Menu extends Model
     {
         $this->attributes['harga'] = str_replace(',', '', $value);
     }
+
+    //relasi dengan tabel relasi many to many nya
+    public function penjualanMenu()
+    {
+        return $this->hasMany(PenjualanMenu::class, 'menu_id');
+    }
 }
