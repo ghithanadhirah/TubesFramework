@@ -37,10 +37,6 @@ use Illuminate\Support\Facades\DB;
 // untuk dapat menggunakan action
 // use Filament\Forms\Components\Actions\Action;
 
-// tambahan untuk tombol unduh pdf
-use Filament\Tables\Actions\Action;
-use Barryvdh\DomPDF\Facade\Pdf; // Kalau kamu pakai DomPDF
-use Illuminate\Support\Facades\Storage;
 
 class PenjualanResource extends Resource
 {
@@ -270,25 +266,6 @@ class PenjualanResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])
-            // tombol tambahan
-            ->headerActions([
-                //tombol tambahan export pdf
-                // ✅ Tombol Unduh PDF
-                Action::make('downloadPdf')
-                ->label('Unduh PDF')
-                ->icon('heroicon-o-document-arrow-down')
-                ->color('success')
-                ->action(function () {
-                    $penjualan = Penjualan::all();
-
-                    $pdf = Pdf;;loadView('pdf.penjualan', ['penjualan' => $penjualan]);
-
-                    return response()->streamDownload(
-                        fn () => print($pdf->output()),
-                        'pelanggan-list.pdf'
-                    );
-                })
             ]);
     }
 
