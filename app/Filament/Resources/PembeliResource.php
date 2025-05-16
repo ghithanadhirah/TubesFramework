@@ -19,6 +19,8 @@ class PembeliResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-identification';
 
+    protected static ?string $navigationGroup = 'Masterdata';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -47,6 +49,12 @@ class PembeliResource extends Resource
                     ->tel()
                     ->required()
                     ->placeholder('Masukkan nomor telepon'),
+
+                TextInput::make('tanggal_daftar')
+                    ->label('Tanggal Daftar')
+                    ->tel()
+                    ->required()
+                    ->placeholder('Masukkan Tanggal'),
                 
                 Toggle::make('status')
                     ->label('Status Aktif')
@@ -80,6 +88,11 @@ class PembeliResource extends Resource
                     ->sortable()
                     ->searchable(),
                 
+                TextColumn::make('tanggal_daftar')
+                    ->label('Tanggal Daftar')
+                    ->sortable()
+                    ->searchable(),
+                    
                 TextColumn::make('status')
                     ->label('Status')
                     ->formatStateUsing(fn ($state) => $state ? 'Aktif' : 'Nonaktif')
