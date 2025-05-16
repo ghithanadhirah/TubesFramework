@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('karyawan', function (Blueprint $table) {
+        Schema::create('presensi', function (Blueprint $table) {
             $table->id();
-            $table->string('id_karyawan')->unique();
-            $table->string('nama');
-            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
-            $table->string('email')->unique();
-            $table->string('telepon');
-            $table->string('alamat');
+            $table->string('id_presensi')->unique();
+            $table->foreignId('id_karyawan')->constrained('karyawan')->cascadeOnDelete();
+            $table->dateTime('tanggal_hadir')->nullable();
+            $table->enum('status', ['hadir', 'izin', 'sakit'])->default('hadir');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('karyawan');
+        Schema::dropIfExists('presensi');
     }
 };
