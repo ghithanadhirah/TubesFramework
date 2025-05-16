@@ -41,6 +41,12 @@ class KaryawanResource extends Resource
     {
         return $form
             ->schema([
+                TextInput::make('id_karyawan')
+                    ->label('ID Karyawan')
+                    ->default(fn () => Karyawan::getKodeKaryawan())
+                    ->readOnly()
+                    ->dehydrated(),
+
                 TextInput::make('nama')
                     ->label('Nama')
                     ->required(),
@@ -78,6 +84,12 @@ class KaryawanResource extends Resource
     {
         return $table
         ->columns([
+            TextColumn::make('id_karyawan')
+            ->label('ID')
+            ->searchable()
+            ->sortable()
+            ,
+
             TextColumn::make('nama')
                 ->label('Nama')
                 ->searchable()
@@ -124,7 +136,7 @@ class KaryawanResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListKaryawans::route('/'),
+            'index' => Pages\ListKaryawan::route('/'),
             'create' => Pages\CreateKaryawan::route('/create'),
             'edit' => Pages\EditKaryawan::route('/{record}/edit'),
         ];
