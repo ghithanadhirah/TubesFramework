@@ -139,7 +139,7 @@ class PenjualanResource extends Resource
                                         // $harga = $get('harga_jual'); // Ambil harga barang
                                         // $total = $harga * $state; // Hitung total
                                         // $set('total', $total); // Set total secara otomatis
-                                        $totalTagihan = collect($get('penjualan_menu'))
+                                        $totalTagihan = collect($get('penjualan_menus'))
                                         ->sum(fn ($item) => ($item['harga_jual'] ?? 0) * ($item['jml'] ?? 0));
                                         $set('tagihan', $totalTagihan);
                                     })
@@ -200,7 +200,7 @@ class PenjualanResource extends Resource
                                         $totalTagihan = PenjualanMenu::where('penjualan_id', $penjualan->id)
                                             ->sum(DB::raw('harga_jual * jml'));
 
-                                        // Update tagihan di tabel penjualan2
+                                        // Update tagihan di tabel penjualan
                                         $penjualan->update(['tagihan' => $totalTagihan]);
                                                                     })
                                         

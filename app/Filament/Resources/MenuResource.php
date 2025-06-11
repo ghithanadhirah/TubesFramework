@@ -65,7 +65,7 @@ class MenuResource extends Resource
                     ->label('Kategori Menu'),
 
                 FileUpload::make('foto')
-                    ->directory('foto_menu')
+                    ->directory('foto')
                     ->required()
                     ->label('Foto Menu'),
             ]);

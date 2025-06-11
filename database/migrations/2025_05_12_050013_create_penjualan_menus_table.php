@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade');
             $table->integer('harga_beli');
             $table->integer('harga_jual');
-            $table->integer('jml'); // jumlah barang yang dibeli
+            $table->integer('jml'); // jumlah menu yang dibeli
             $table->date('tgl');
             $table->timestamps();
         });
