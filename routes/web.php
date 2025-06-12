@@ -57,6 +57,7 @@ Route::get('/login', function () {
 use App\Http\Controllers\MidtransController;
 Route::get('/cekmidtrans', [MidtransController::class, 'cekmidtrans']);
 
+Route::get('filament.resources.adminresource.pages.clusteringvisual');
 
 Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
 Route::post('/keranjang/tambah/{id}', [KeranjangController::class, 'tambah'])->name('keranjang.tambah');
