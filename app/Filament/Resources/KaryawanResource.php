@@ -32,13 +32,19 @@ use Filament\Forms\Components\Grid;
 class KaryawanResource extends Resource
 {
     protected static ?string $model = Karyawan::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationGroup = 'Masterdata';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                TextInput::make('id_karyawan')
+                    ->label('ID Karyawan')
+                    ->readOnly()
+                    ->default(fn () => \App\Models\Karyawan::generateID())
+                    ->required(),
+
                 TextInput::make('nama')
                     ->label('Nama')
                     ->required(),
@@ -53,13 +59,14 @@ class KaryawanResource extends Resource
 
                 TextInput::make('email')
                     ->label('Email')
+                    ->email()
                     ->required(),
-                
+
                 TextInput::make('telepon')
                     ->label('Nomor Telepon')
                     ->required()
                     ->maxLength(15)
-                    ->tel() // Ini akan mengatur input sebagai nomor telepon
+                    ->numeric()
                     ->placeholder('Masukkan nomor telepon')
                     ->regex('/^[0-9]+$/', 'Nomor telepon hanya boleh berisi angka.'),
 
@@ -67,62 +74,59 @@ class KaryawanResource extends Resource
                     ->label('Alamat')
                     ->maxLength(500)
                     ->required(),
-
-             ]);
-            
+            ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
-            TextColumn::make('nama')
-                ->label('Nama')
-                ->searchable()
-                ->sortable(),
+            ->columns([
+                TextColumn::make('id_karyawan')
+                    ->label('ID Karyawan')
+                    ->sortable()
+                    ->searchable(),
 
-            TextColumn::make('jenis_kelamin')
-                ->label('Jenis Kelamin')
-                ->sortable(),
+                TextColumn::make('nama')
+                    ->label('Nama')
+                    ->searchable()
+                    ->sortable(),
 
-            TextColumn::make('email')
-                ->label('Email')
-                ->sortable(),
+                TextColumn::make('jenis_kelamin')
+                    ->label('Jenis Kelamin')
+                    ->sortable(),
 
-            TextColumn::make('telepon')
-                ->label('Nomor Telepon')
-                ->sortable(),
-            
-            TextColumn::make('alamat')
-                ->label('Alamat')
-                ->sortable(),
+                TextColumn::make('email')
+                    ->label('Email')
+                    ->sortable(),
+
+                TextColumn::make('telepon')
+                    ->label('Nomor Telepon')
+                    ->sortable(),
+
+                TextColumn::make('alamat')
+                    ->label('Alamat')
+                    ->sortable(),
             ])
-            ->filters([
-                //
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListKaryawans::route('/'),
+            'index' => Pages\ListKaryawan::route('/'),
             'create' => Pages\CreateKaryawan::route('/create'),
             'edit' => Pages\EditKaryawan::route('/{record}/edit'),
         ];

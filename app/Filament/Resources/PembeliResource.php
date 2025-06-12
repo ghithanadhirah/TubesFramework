@@ -12,22 +12,25 @@ use Filament\Tables\Table;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\DatePicker;
 
 class PembeliResource extends Resource
 {
     protected static ?string $model = Pembeli::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static ?string $navigationIcon = 'heroicon-o-identification';
+
+    protected static ?string $navigationGroup = 'Masterdata';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('kode_pembeli')
-                    ->label('Kode Pembeli')
-                    ->default(fn () => Pembeli::getKdPembeli())
-                    ->required()
-                    ->readonly(),
+                        ->label('Kode Pembeli')
+                        ->required()
+                        ->unique(ignoreRecord: true)
+                        ->placeholder('Masukkan kode akun'),
                 
                 TextInput::make('nama')
                     ->label('Nama Pembeli')
@@ -45,11 +48,16 @@ class PembeliResource extends Resource
                     ->required()
                     ->placeholder('Masukkan email pembeli'),
                 
+                    
                 TextInput::make('nomor_telepon')
                     ->label('No. Telepon')
                     ->tel()
                     ->required()
                     ->placeholder('Masukkan nomor telepon'),
+
+                DatePicker::make('tanggal_daftar') // â pakai DatePicker di dalam form
+                ->label('Tanggal Daftar')
+                ->required(),
                 
                 Toggle::make('status')
                     ->label('Status Aktif')
@@ -63,8 +71,8 @@ class PembeliResource extends Resource
             ->columns([
                 TextColumn::make('kode_pembeli')
                     ->label('Kode Pembeli')
-                    ->sortable(),
-                
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('nama')
                     ->label('Nama Pembeli')
                     ->sortable()
@@ -86,6 +94,11 @@ class PembeliResource extends Resource
                     ->sortable()
                     ->searchable(),
                 
+                TextColumn::make('tanggal_daftar')
+                    ->label('Tanggal Daftar')
+                    ->sortable()
+                    ->searchable(),
+                    
                 TextColumn::make('status')
                     ->label('Status')
                     ->formatStateUsing(fn ($state) => $state ? 'Aktif' : 'Nonaktif')

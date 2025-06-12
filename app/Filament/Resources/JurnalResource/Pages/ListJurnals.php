@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\KaryawanResource\Pages;
+namespace App\Filament\Resources\JurnalResource\Pages;
 
-use App\Filament\Resources\KaryawanResource;
+use App\Filament\Resources\JurnalResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListKaryawans extends ListRecords
+class ListJurnals extends ListRecords
 {
-    protected static string $resource = KaryawanResource::class;
+    protected static string $resource = JurnalResource::class;
 
     protected function getHeaderActions(): array
     {
