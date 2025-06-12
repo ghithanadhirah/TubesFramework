@@ -7,14 +7,51 @@
   <title>Rumah Makan Podomoro</title>
   <link rel="shortcut icon" type="image/png" href="{{asset('images/logos/favicon.png')}}" />
   <link rel="stylesheet" href="{{asset('css/styles.min.css')}}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM6g0g5z5e5e5e5e5e5e5e5e5e5e5e5e5e5e5" crossorigin="anonymous" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+    }
+
+    .card {
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-label {
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background-color: #ffb703;
+      border: none;
+      transition: background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+      background-color: #fb8500;
+    }
+
+    .error-message {
+      color: red;
+      margin-bottom: 15px;
+    }
+
+    .welcome-message {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
-  <!--  Body Wrapper -->
+  <!-- Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
-    <div
-      class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
       <div class="d-flex align-items-center justify-content-center w-100">
         <div class="row justify-content-center w-100">
           <div class="col-md-8 col-lg-6 col-xxl-3">
@@ -24,9 +61,14 @@
                   <img src="{{asset('images/logos/mukena.PNG')}}" width="180" alt="">
                 </a>
 
-                <!-- Tambahan alert -->
+                <!-- Welcome Message -->
+                <div class="welcome-message">
+                  Selamat Datang di Rumah Makan Podomoro!
+                </div>
+
+                <!-- Alert for errors -->
                 @if ($errors->any())
-                    <div style="color: red;">
+                    <div class="error-message">
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -39,19 +81,21 @@
                   @csrf
                   <div class="mb-3">
                     <label for="email" class="form-label">Username</label>
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="fas fa-user"></i></span>
+                      <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter your username">
+                    </div>
                   </div>
                   <div class="mb-4">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                      <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                    </div>
                   </div>
-                 
-                  <!-- <a href="./index.html" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</a> -->
-                  <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Login</button>
-                  <div class="d-flex align-items-center justify-content-center">
-                    <!-- <p class="fs-4 mb-0 fw-bold">New to Modernize?</p> -->
-                    <!-- <a class="text-primary fw-bold ms-2" href="./authentication-register.html">Create an account</a> -->
-                  </div>
+
+                  <button type="submit" class="btn btn-primary w-100 py-2 fs-4 mb-4 rounded-2">Login</button>
+          
                 </form>
               </div>
             </div>

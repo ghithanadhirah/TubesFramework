@@ -55,9 +55,8 @@
         </table>
 
         <h4>Total: {{ rupiah($total) }}</h4>
-<button id="pay-button" class="btn btn-primary">Bayar Sekarang</button>
-<button id="cash-button" class="btn btn-success ms-2">Bayar Tunai</button>
-
+        <button id="pay-button" class="btn btn-primary">Bayar Sekarang</button>
+        <button id="cash-button" class="btn btn-success ms-2">Bayar Tunai</button>
 
         <!-- Tambahkan Midtrans Snap JS -->
         <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
@@ -84,7 +83,7 @@
 
     @else
         <p>Keranjang masih kosong.</p>
-        <a href="/" class="btn btn-primary">Belanja Sekarang</a>
+        <a href="/depan" class="btn btn-primary">Belanja Sekarang</a>
     @endif
 </div>
 @endsection

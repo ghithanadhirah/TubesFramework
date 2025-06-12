@@ -1,5 +1,5 @@
-<footer class="bg-dark text-white py-4">
-  <div class="container text-center">
-    <p class="mb-0">&copy; 2025 Rumah Makan Podomoro</p>
-  </div>
+<footer class="footer mt-5">
+    <div>
+        &copy; {{ date('Y') }} Rumah Makan Podomoro <i class="bi bi-heart-fill text-danger"></i>
+    </div>
 </footer>
